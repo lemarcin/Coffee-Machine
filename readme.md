@@ -1,0 +1,7 @@
+## [Project: Coffee Machine](https://hyperskill.org/projects/33)
+#### [Work on project. Stage 1/6: Making coffee](https://hyperskill.org/projects/33/stages/175/implement)
+#### [Work on project. Stage 2/6: Ingredient calculator](https://hyperskill.org/projects/33/stages/176/implement)
+#### [Work on project. Stage 3/6: Estimate the number of servings](https://hyperskill.org/projects/33/stages/177/implement)
+#### [Work on project. Stage 4/6: Buy, fill, take!](https://hyperskill.org/projects/33/stages/178/implement)
+#### [Work on project. Stage 5/6: Keep track of the supplies](https://hyperskill.org/projects/33/stages/179/implement)
+#### [Work on project. Stage 6/6: Brush up your code](https://hyperskill.org/projects/33/stages/180/implement)
