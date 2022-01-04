@@ -2,12 +2,14 @@ package machine;
 
 public class CoffeeMachine {
     public static void main(String[] args) {
-        System.out.println("Starting to make a coffee");
-        System.out.println("Grinding coffee beans");
-        System.out.println("Boiling water");
-        System.out.println("Mixing boiled water with crushed coffee beans");
-        System.out.println("Pouring coffee into the cup");
-        System.out.println("Pouring some milk into the cup");
-        System.out.println("Coffee is ready!");
+        System.out.print("Write how many cups of coffee you will need: \n> ");
+        int cups = new java.util.Scanner(System.in).nextInt();
+        final int water = 200;
+        final int milk = 50;
+        final int coffee = 15;
+        System.out.printf("For %d cups of coffee you will need:%n", cups);
+        System.out.printf("%d ml of water\n", cups * water);
+        System.out.printf("%d ml of milk\n", cups * milk);
+        System.out.printf("%d g of coffee beans\n", cups * coffee);
     }
 }
