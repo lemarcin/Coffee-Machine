@@ -3,12 +3,13 @@ package machine;
 import java.util.Scanner;
 
 public class CoffeeMachine {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Machine machine = new Machine();
         do {
             machine.master(scanner.nextLine());
-        }while (machine.exit);
+        }while (!machine.exit);
     }
 }
 
@@ -34,10 +35,9 @@ class Machine {
     private int coffeeLevel = 120;
     private int cups = 9;
     private Status status = Status.MENU;
-    protected Boolean exit = true;
+    protected Boolean exit = false;
 
     public Machine() {
-        state();
         actionMenu();
     }
 
@@ -46,7 +46,7 @@ class Machine {
             case MENU:
                 switch (command) {
                     case "buy":
-                        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ");
+                        System.out.println("\nWhat do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu: ");
                         status = Status.BUY;
                         break;
                     case "fill":
@@ -55,14 +55,22 @@ class Machine {
                         break;
                     case "take":
                         take();
-                        state();
-                        exit = false;
                         status = Status.MENU;
+                        break;
+                    case "remaining":
+                        remaining();
+                        status = Status.MENU;
+                        break;
+                    case "exit":
+                        exit = true;
                         break;
                 }
                 break;
             case BUY:
-                buy(command);
+                if (!command.equals("back")) {
+                    buy(command);
+                }
+                status = Status.MENU;
                 break;
             case FILL_WATER:
                 waterLevel += Integer.parseInt(command);
@@ -82,14 +90,15 @@ class Machine {
             case FILL_CUPS:
                 cups += Integer.parseInt(command);
                 status = Status.MENU;
-                state();
-                exit = false;
                 break;
+        }
+        if (status == Status.MENU && exit) {
+            actionMenu();
         }
     }
 
     private void actionMenu() {
-        System.out.println("Write action (buy, fill, take):");
+        System.out.println("Write action (buy, fill, take, remaining, exit): ");
     }
 
     private void buy(String action) {
@@ -105,7 +114,7 @@ class Machine {
                     System.out.println("Sorry, not enough" +
                             (waterLevel < waterEspresso ? " water" : "") +
                             (coffeeLevel < coffeeEspresso ? " coffee" : "") +
-                            (cups == 0 ? " cups" : "") + "!");
+                            (cups == 0 ? " cups" : "") + "!\n");
                 }
                 break;
             case "2":
@@ -121,7 +130,7 @@ class Machine {
                             (waterLevel < waterLatte ? " water" : "") +
                             (milkLevel < milkLatte ? " milk" : "") +
                             (coffeeLevel < coffeeLatte ? " coffee" : "") +
-                            (cups == 0 ? " cups" : "") + "!");
+                            (cups == 0 ? " cups" : "") + "!\n");
                 }
                 break;
             case "3":
@@ -137,16 +146,14 @@ class Machine {
                             (waterLevel < waterCappuccino ? " water" : "") +
                             (milkLevel < milkCappuccino ? " milk" : "") +
                             (coffeeLevel < coffeeCappuccino ? " coffee" : "") +
-                            (cups == 0 ? " cups" : "") + "!");
+                            (cups == 0 ? " cups" : "") + "!\n");
                 }
                 break;
         }
-        state();
-        exit = false;
     }
 
-    private void state() {
-        System.out.println("The coffee machine has:");
+    private void remaining() {
+        System.out.println("\nThe coffee machine has:");
         System.out.println(waterLevel + " ml of water");
         System.out.println(milkLevel + " ml of milk");
         System.out.println(coffeeLevel + " g of coffee beans");
@@ -155,7 +162,7 @@ class Machine {
     }
 
     private void take() {
-        System.out.println("I gave you $" + money);
+        System.out.println("\nI gave you $" + money);
         money = 0;
     }
 }
